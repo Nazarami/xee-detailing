@@ -5,6 +5,10 @@
 	export const prerender = true;
 </script>
 
+<head>
+	<title>Xee Detailing</title>
+</head>
+
 <Navbar />
 <slot />
 <Footer />
