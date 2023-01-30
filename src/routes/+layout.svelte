@@ -7,6 +7,7 @@
 
 <head>
 	<title>Xee Detailing</title>
+	<link rel="icon" href="logo.svg" />
 </head>
 
 <Navbar />

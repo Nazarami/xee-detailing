@@ -2,11 +2,21 @@
 	function handleButtonClick() {
 		const element = document.getElementById('element-to-scroll-to');
 		if (element) {
-			window.scroll({
-				top: element.offsetTop,
-				left: 0,
-				behavior: 'smooth'
-			});
+			const targetPosition = element.offsetTop;
+			let currentPosition = window.pageYOffset;
+			const speed = (targetPosition - currentPosition) / 80;
+
+			const animateScroll = () => {
+				currentPosition += speed;
+				if (currentPosition >= targetPosition) {
+					window.scrollTo(0, targetPosition);
+					return;
+				}
+				window.scrollTo(0, currentPosition);
+				requestAnimationFrame(animateScroll);
+			};
+
+			animateScroll();
 		}
 	}
 </script>
@@ -16,7 +26,7 @@
 	<h1 class="text-xl font-bold mb-[25px] md:mb-0">Xee Detailing</h1>
 	<button
 		on:click={handleButtonClick}
-		class=" h-[60px] w-full text-center py-[10px] border-solid border-white border-2 rounded-md box-border md:h-[45px] md:w-[125px] cursor-pointer hover:border-blue-500 active:bg-gray-800 transition-all duration-150 ease-in-out hover:scale-105">
-		<h2 class="text-sm">Get In Touch</h2>
+		class=" h-[60px] w-full text-center py-[10px] border-solid border-white border-2 rounded-md box-border md:h-[45px] md:w-[125px] cursor-pointer hover:border-blue-500 active:bg-gray-800 transition-all duration-150 ease-in-out hover:scale-105 text-small">
+		Get In Touch
 	</button>
 </div>
