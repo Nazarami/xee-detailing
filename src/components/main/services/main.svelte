@@ -10,7 +10,18 @@
 		{
 			name: "Pre-sale Detail",
 			time: '1 Day',
-			paragraph:"",
+			paragraph:
+				"Pre-foam\n" +
+				"Wheels and wheel arches cleaned\n" +
+				"Two bucket wash\n" +
+				"Clay bar and decontamination\n" +
+				"Microfiber and blow dry\n" +
+				"Single stage paint correction\n" +
+				"Two-year Gyeon coating\n" +
+				"Thorough interior cleaning, including leather seat steaming and conditioning\n" +
+				"Engine bay detailing\n" +
+				"Gloss-enhancement polish\n" +
+				"Spray sealant application\n",
 			image: 'service-images/image-0.jpeg'
 		},
 		{
