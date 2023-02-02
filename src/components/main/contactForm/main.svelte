@@ -1,6 +1,12 @@
 <script lang="ts">
 	import Field from './field.svelte';
 	import Button from './button.svelte';
+	import { myStore } from './stores.ts';
+
+	let subjectText = "";
+
+	$: subjectText = myStore.value;
+
 </script>
 
 <form
@@ -9,7 +15,7 @@
 	method="POST">
 	<Field name="Name" type="text" placeholder="Enter your name" />
 	<Field name="Email" type="email" placeholder="Enter your email" />
-	<Field name="Subject" type="text" placeholder="Type the subject" />
+	<Field name="Subject" type="text" placeholder="Type the subject" value={subjectText}/>
 	<Field name="Message" type="text" placeholder="Type your message..." />
 	<Button />
 </form>

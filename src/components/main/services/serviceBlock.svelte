@@ -1,4 +1,25 @@
 <script lang="ts">
+	function handleButtonClick() {
+		const element = document.getElementById('element-to-scroll-to');
+		if (element) {
+			const targetPosition = element.offsetTop;
+			let currentPosition = window.pageYOffset;
+			const speed = (targetPosition - currentPosition) / 80;
+
+			const animateScroll = () => {
+				currentPosition += speed;
+				if (currentPosition >= targetPosition) {
+					window.scrollTo(0, targetPosition);
+					return;
+				}
+				window.scrollTo(0, currentPosition);
+				requestAnimationFrame(animateScroll);
+			};
+
+			animateScroll();
+		}
+	}
+
 	export let name: string;
 	export let time: string;
 	export let paragraph: string;
@@ -18,6 +39,7 @@
 		</ul>
 		<img class="h-48 object-cover mt-3" src={image} alt="" />
 		<div
+			on:click={handleButtonClick}
 			class="h-12 px-10 border-[1px] border-white cursor-pointer active:border-blue-500 transition-all ease-in-out">
 			<div class="flex justify-center items-center h-full">
 				<p>Inquire Now</p>
