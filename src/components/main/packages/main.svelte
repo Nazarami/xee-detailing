@@ -89,7 +89,7 @@
 
 </script>
 
-<div class="flex flex-col space-y-6 p-4 md:justify-evenly md:flex-row md:space-y-0 md:space-x-8 md:h-[1000px]">
+<div class="flex flex-col space-y-6 p-4 md:justify-evenly md:flex-row md:space-y-0 md:space-x-8 md:h-[1300px]">
   <Card p={preSale}/>
   <Card p={standard}/>
   <Card p={premium}/>
