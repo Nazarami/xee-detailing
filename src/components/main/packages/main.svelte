@@ -43,11 +43,55 @@
       "Foot pedals cleaned and sanitised"
     ]
   }
+  const premium: Package = {
+    title: "Premium",
+    duration: "1 - 2 Days",
+    price: "Starting from $1200",
+    services: [
+      "Wheels and arches cleaned",
+      "High pressure rinse & foam with two bucket wash",
+      "Decontamination and clay bar treatment",
+      "Contactless heated blow dry to prevent any further scratches",
+      "Multi stage paint correction",
+      "Application of Gyeon MOHS EVO ( four year coating)",
+      "Application of Gyeon View (glass coating)",
+      "Tyres dressed",
+      "Carpet cleaned and sanitised",
+      "Rubber floor mats pressure cleaned and sanitised",
+      "Leather seats cleaned & conditioned",
+      "Interior glass and windshield cleaned",
+      "Foot pedals cleaned and sanitised"
+    ]
+  }
+  const presidential: Package = {
+    title: "Presidential",
+    duration: "2 - 3 Days",
+    price: "Starting from $1700",
+    services: [
+      "Wheels and arches cleaned",
+      "High pressure rinse & foam with two bucket wash",
+      "Decontamination and clay bar treatment",
+      "Contactless heated blow dry to prevent any further scratches",
+      "Multi stage paint correction",
+      "Application of Gyeon SYNCRO EVO ( Dual Layer coating)",
+      "Application of Gyeon View (glass coating)",
+      "Tyres dressed",
+      "Carpet cleaned and sanitised",
+      "Rubber floor mats pressure cleaned and sanitised",
+      "Leather seats steam cleaned",
+      "Application of Gyeon leather shield (leather coating)",
+      "Interior glass and windshield cleaned",
+      "Foot pedals cleaned and sanitised"
+    ]
+  }
+
+
 
 </script>
 
 <div class="flex flex-col space-y-6 p-4 md:justify-evenly md:flex-row md:space-y-0 md:space-x-8">
   <Card p={preSale}/>
   <Card p={standard}/>
-  <Card p={preSale}/>
+  <Card p={premium}/>
+  <Card p={presidential}/>
 </div>

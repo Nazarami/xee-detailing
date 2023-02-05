@@ -7,7 +7,7 @@
   }
   export let p: Package;
 </script>
-<div class="bg-[#141414] h-[618px] w-full md:h-[892px] md:w-[250px] flex-1 md:h-full md:p-8">
+<div class="bg-[#141414] h-[618px] w-full md:h-[892px] md:w-[250px] flex-1 md:h-full md:p-8 rounded-lg h-full">
   <div class=" my-4 text-center text-4xl font-bold">{p.title}</div>
   <div class=" text-center text-sm">
     <p class="text-xs mb-2">{p.duration}</p>
