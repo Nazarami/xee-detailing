@@ -24,9 +24,9 @@
 <div
 	class="bg-[#0c0c0d] h-[140px] p-[20px] flex flex-col justify-center text-white md:flex-row md:justify-between md:px-[75px] md:h-[115px] md:items-center"
 >
-	<div class="flex justify-center items-center space-x-1">
+	<div class="flex items-center">
 		<img src="logo.svg" alt="" class="h-10" />
-		<h1 class="text-xl font-bold mb-[25px] md:mb-0">Xee Detailing</h1>
+		<h1 class="text-xl font-bold mb-[25px] md:mb-0 mt-6 ml-1 md:mt-0">Xee Detailing</h1>
 	</div>
 	<button
 		on:click={handleButtonClick}
