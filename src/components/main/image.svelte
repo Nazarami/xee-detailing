@@ -9,5 +9,6 @@
 <style>
 	#image-container {
 		height: calc(100vh - 155px);
+		max-width: 100%;
 	}
 </style>

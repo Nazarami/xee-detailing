@@ -8,10 +8,11 @@
 <div>
 	<label for={name} class="px-2 font-thin text-md">{name}</label>
 	<input
-		bind:value={value}
+		bind:value
 		type="text"
 		{name}
 		required
 		{placeholder}
-		class={`h-[43px] hover:border-blue-500 active:border-blue-500 transition-colors ease-in-out bg-black p-2 border-[1px] rounded-sm border-gray-500 outline-none text-left} w-full`} />
+		class={`h-[43px] hover:border-[#4e80ee] active:border-[#4e80ee] transition-colors ease-in-out bg-black p-2 border-[1px] rounded-sm border-gray-500 outline-none text-left} w-full`}
+	/>
 </div>
