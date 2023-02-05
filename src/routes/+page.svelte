@@ -1,9 +1,9 @@
 <script>
 	import Image from '../components/main/image.svelte';
 	import ParagraphBlock from '../components/main/paragraphBlock.svelte';
-	import Services from '../components/main/services/main.svelte';
 	import Quotes from '../components/main/quotes/main.svelte';
 	import ContactForm from '../components/main/contactForm/main.svelte';
+	import Packages from '../components/main/packages/main.svelte';
 	const mainText =
 		'Our mission at Xeedetailing is simple: to provide high-quality packages for our valued clients. Our team goes above and beyond to cater to each project’s specific needs. Through open communication and exceptional service, we hope you’ll find what you’re looking for with our Car Detailing Service. For more information or general inquiries, get in touch today.';
 	const commitmentText =
@@ -15,7 +15,7 @@
 	<ParagraphBlock text={mainText} />
 	<Image src="main-images/image-1.jpeg" />
 	<ParagraphBlock text={commitmentText} />
-	<Services />
+	<Packages />
 	<Quotes />
 	<ContactForm />
 </main>
