@@ -9,7 +9,7 @@
 	const preSale: Package = {
 		title: 'Pre-sale',
 		duration: '1 Day',
-		price: 'Starting from $500',
+		price: '',
 		services: [
 			'Wheels and arches cleaned',
 			'Engine bay detail',
@@ -28,7 +28,7 @@
 	const standard: Package = {
 		title: 'Standard',
 		duration: '1 - 2 Days',
-		price: 'Starting from $800',
+		price: '',
 		services: [
 			'Wheels and arches cleaned',
 			'High pressure rinse & foam with two bucket wash',
@@ -66,7 +66,7 @@
 	const presidential: Package = {
 		title: 'Presidential',
 		duration: '2 - 3 Days',
-		price: 'Starting from $1700',
+		price: '',
 		services: [
 			'Wheels and arches cleaned',
 			'High pressure rinse & foam with two bucket wash',
