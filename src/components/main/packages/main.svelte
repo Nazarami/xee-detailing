@@ -46,7 +46,7 @@
 	const premium: Package = {
 		title: 'Premium',
 		duration: '1 - 2 Days',
-		price: 'Starting from $1200',
+		price: '',
 		services: [
 			'Wheels and arches cleaned',
 			'High pressure rinse & foam with two bucket wash',
