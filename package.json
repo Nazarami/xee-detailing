@@ -2,6 +2,7 @@
 	"name": "xee-detailing",
 	"version": "0.0.1",
 	"private": true,
+	"packageManager": "bun@1.3.13",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
