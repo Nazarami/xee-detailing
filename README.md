@@ -7,17 +7,25 @@ A website for Xee Detailing, a Melbourne-based car detailing business.
 - Svelte
 - TailwindCSS
 - TypeScript
-- Yarn
+- Bun
+- Cloudflare Workers/Pages
 
 ## Usage
 
 1. Clone the repository to your local machine
 
-2. Install dependencies
+2. Install dependencies with `bun install`
 
-3. Start the development server
+3. Start the development server with `bun run dev`
 
-The website should be running at `http://localhost:5000`.
+The website should be running at the local URL printed by Vite.
+
+To preview the Cloudflare build locally:
+
+```sh
+bun run build
+bunx wrangler pages dev .svelte-kit/cloudflare
+```
 
 ## Screenshot
 

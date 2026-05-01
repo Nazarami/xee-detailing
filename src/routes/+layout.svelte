@@ -4,10 +4,10 @@
 	import Footer from '../components/footer/main.svelte';
 </script>
 
-<head>
+<svelte:head>
 	<title>Xee Detailing</title>
 	<link rel="icon" href="logo.svg" />
-</head>
+</svelte:head>
 
 <Navbar />
 <slot />

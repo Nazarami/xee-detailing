@@ -1,5 +1,5 @@
 <script>
-	function handleButtonClick() {
+	const handleButtonClick = () => {
 		const element = document.getElementById('element-to-scroll-to');
 		if (element) {
 			const targetPosition = element.offsetTop;
@@ -18,7 +18,7 @@
 
 			animateScroll();
 		}
-	}
+	};
 </script>
 
 <div

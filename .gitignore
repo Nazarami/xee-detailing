@@ -3,6 +3,9 @@ node_modules
 /build
 /.svelte-kit
 /package
+.netlify/
+.idea/
+.wrangler/
 .env
 .env.*
 !.env.example
