@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Instagram from '../navbar/upper/socialMedia/assets/instagram.svelte';
-	import Facebook from '../navbar/upper/socialMedia/assets/facebook.svelte';
-	import Tiktok from '../navbar/upper/socialMedia/assets/tiktok.svelte';
+import Instagram from '../navbar/upper/socialMedia/assets/instagram.svelte'
+import Facebook from '../navbar/upper/socialMedia/assets/facebook.svelte'
+import Tiktok from '../navbar/upper/socialMedia/assets/tiktok.svelte'
 </script>
 
 <footer
@@ -10,12 +10,8 @@
 >
 	<div class=" flex space-y-4 flex-col text-white text-center items-center">
 		<h1 class="text-2xl font-bold">Xee Detailing</h1>
-		<h3 class="text-sm">
-			<a href="mailto:xeedetailing.com">xeedetailing@gmail.com</a>
-		</h3>
-		<h4>
-			<a href="tel:+61401760066" class="text-sm"> 0401 760 066 </a>
-		</h4>
+		<h3 class="text-sm"><a href="mailto:xeedetailing.com">xeedetailing@gmail.com</a></h3>
+		<h4><a href="tel:+61401760066" class="text-sm"> 0401 760 066 </a></h4>
 		<div class="flex space-x-2 items-center">
 			<a href="https://www.instagram.com/xeedetailing/" target="_blank" rel="noreferrer">
 				<Instagram />

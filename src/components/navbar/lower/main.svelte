@@ -1,31 +1,31 @@
 <script>
-	const handleButtonClick = () => {
-		const element = document.getElementById('element-to-scroll-to');
-		if (element) {
-			const targetPosition = element.offsetTop;
-			let currentPosition = window.pageYOffset;
-			const speed = (targetPosition - currentPosition) / 80;
+const handleButtonClick = () => {
+	const element = document.getElementById('element-to-scroll-to')
+	if (element) {
+		const targetPosition = element.offsetTop
+		let currentPosition = window.pageYOffset
+		const speed = (targetPosition - currentPosition) / 80
 
-			const animateScroll = () => {
-				currentPosition += speed;
-				if (currentPosition >= targetPosition) {
-					window.scrollTo(0, targetPosition);
-					return;
-				}
-				window.scrollTo(0, currentPosition);
-				requestAnimationFrame(animateScroll);
-			};
-
-			animateScroll();
+		const animateScroll = () => {
+			currentPosition += speed
+			if (currentPosition >= targetPosition) {
+				window.scrollTo(0, targetPosition)
+				return
+			}
+			window.scrollTo(0, currentPosition)
+			requestAnimationFrame(animateScroll)
 		}
-	};
+
+		animateScroll()
+	}
+}
 </script>
 
 <div
 	class="bg-[#0c0c0d] h-[140px] p-[20px] flex flex-col justify-center text-white md:flex-row md:justify-between md:px-[75px] md:h-[115px] md:items-center"
 >
 	<div class="flex items-center">
-		<img src="logo.svg" alt="" class="h-10" />
+		<img src="logo.svg" alt="" class="h-10">
 		<h1 class="text-xl font-bold mb-[25px] md:mb-0 mt-6 ml-1 md:mt-0">Xee Detailing</h1>
 	</div>
 	<button

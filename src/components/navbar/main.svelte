@@ -1,6 +1,6 @@
 <script>
-	import UpperNavbar from './upper/main.svelte';
-	import LowerNavbar from './lower/main.svelte';
+import UpperNavbar from './upper/main.svelte'
+import LowerNavbar from './lower/main.svelte'
 </script>
 
 <nav class="">

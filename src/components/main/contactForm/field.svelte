@@ -1,8 +1,8 @@
 <script lang="ts">
-	export let name: string;
-	export let type: string;
-	export let placeholder: string;
-	export let value = '';
+export let name: string
+export let type: string
+export let placeholder: string
+export let value = ''
 </script>
 
 <div>
@@ -13,6 +13,6 @@
 		{name}
 		required
 		{placeholder}
-		class={`h-[43px] hover:border-[#4e80ee] active:border-[#4e80ee] transition-colors ease-in-out bg-black p-2 border-[1px] rounded-sm border-gray-500 outline-none text-left} w-full`}
-	/>
+		class="h-[43px] hover:border-[#4e80ee] active:border-[#4e80ee] transition-colors ease-in-out bg-black p-2 border-[1px] rounded-sm border-gray-500 outline-none text-left w-full"
+	>
 </div>

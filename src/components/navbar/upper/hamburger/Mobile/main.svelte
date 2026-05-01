@@ -1,6 +1,6 @@
 <script>
-	import PopUpMenu from './popup.svelte';
-	let open = false;
+import PopUpMenu from './popup.svelte'
+let open = false
 </script>
 
 <div>
@@ -12,19 +12,22 @@
 					aria-hidden="true"
 					class={`block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
 						open ? 'rotate-45' : '-translate-y-1.5'
-					}`}>{''}</span
+					}`}
+					>{''}</span
 				>
 				<span
 					aria-hidden="true"
 					class={`block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
 						open ? 'opacity-0' : 'block'
-					}`}>{''}</span
+					}`}
+					>{''}</span
 				>
 				<span
 					aria-hidden="true"
 					class={`block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out ${
 						open ? '-rotate-45' : 'translate-y-1.5'
-					}`}>{''}</span
+					}`}
+					>{''}</span
 				>
 			</div>
 		</button>

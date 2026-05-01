@@ -9,10 +9,12 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"lint": "biome format . && eslint .",
+		"format": "biome format --write .",
+		"format:check": "biome format ."
 	},
 	"devDependencies": {
+		"@biomejs/biome": "2.4.13",
 		"@sveltejs/adapter-cloudflare": "7.2.8",
 		"@sveltejs/kit": "2.58.0",
 		"@sveltejs/vite-plugin-svelte": "7.0.0",
@@ -20,11 +22,8 @@
 		"@typescript-eslint/parser": "8.59.1",
 		"autoprefixer": "^10.4.13",
 		"eslint": "8.57.1",
-		"eslint-config-prettier": "8.10.2",
 		"eslint-plugin-svelte": "3.17.1",
 		"postcss": "^8.4.21",
-		"prettier": "^2.8.0",
-		"prettier-plugin-svelte": "^2.8.1",
 		"svelte": "5.55.5",
 		"svelte-check": "4.4.6",
 		"tailwindcss": "3.4.19",

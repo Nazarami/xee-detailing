@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Instagram from './assets/instagram.svelte';
-	import Facebook from './assets/facebook.svelte';
-	import Tiktok from './assets/tiktok.svelte';
+import Instagram from './assets/instagram.svelte'
+import Facebook from './assets/facebook.svelte'
+import Tiktok from './assets/tiktok.svelte'
 </script>
 
 <a href="https://www.instagram.com/xeedetailing/" target="_blank" rel="noreferrer">

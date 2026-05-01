@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Field from './field.svelte';
-	import Button from './button.svelte';
+import Field from './field.svelte'
+import Button from './button.svelte'
 </script>
 
 <form
