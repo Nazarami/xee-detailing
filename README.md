@@ -18,7 +18,7 @@ Astro 7 · TypeScript · Tailwind CSS 4 · Cloudflare Workers
 
 1. **Look as premium as the cars.** A dark, editorial design built around the studio's own light-tunnel photography.
 2. **Load instantly on a phone.** Zero framework JavaScript, modern image formats and self-hosted fonts.
-3. **Turn visitors into quote requests.** Every section leads to a short enquiry form, and choosing a package or project fills it in for you.
+3. **Turn visitors into bookings.** Every section leads to the quote section, with one-tap call and WhatsApp links, and choosing a package or project pre-fills the quote form.
 
 The site is prerendered to static HTML and served by Cloudflare's network as static assets, with no server, database or CMS. On Workers' free plan, static asset requests are free and unmetered.
 
@@ -31,11 +31,11 @@ The site is prerendered to static HTML and served by Cloudflare's network as sta
   - The FAQ is an exclusive `<details name>` accordion.
 - **Build-time image pipeline.** Photos live in `src/assets/` as high-resolution sources. Astro's `<Picture>` generates AVIF with WebP fallbacks at multiple widths, with explicit dimensions so nothing shifts while loading. The hero image loads with high fetch priority, everything else lazily, and gallery photos load only when a project is opened.
 - **Real work, real detail.** The 12-project portfolio is typed data in [`src/data/work.ts`](src/data/work.ts). Each project opens a swipeable gallery (keyboard arrows supported) with what was done to the car, taken from the studio's own write-ups.
-- **Security headers and a strict CSP.** Astro hashes every inline script and style into a Content-Security-Policy `<meta>` tag at build time. The only third-party origins allowed are FormSubmit and Cloudflare Web Analytics. [`public/_headers`](public/_headers) adds HSTS, `frame-ancestors 'none'`, a Permissions-Policy and immutable caching for hashed assets.
+- **Security headers and a strict CSP.** Astro hashes every inline script and style into a Content-Security-Policy `<meta>` tag at build time. The only third-party origin allowed is Cloudflare Web Analytics. [`public/_headers`](public/_headers) adds HSTS, `frame-ancestors 'none'`, a Permissions-Policy and immutable caching for hashed assets.
 - **Local SEO.** schema.org `AutomotiveBusiness` structured data with address, opening hours and services, canonical URLs, Open Graph and Twitter cards with a custom share image, plus a generated sitemap and robots.txt. Everything derives from the single `site` URL in [`astro.config.ts`](astro.config.ts).
 - **Self-hosted fonts.** Astro's Fonts API downloads Archivo (including its width axis for the expanded headings) and Instrument Serif at build time, serves them from the site's own domain, preloads the main face and generates metric-matched fallbacks to avoid layout shift.
 - **Accessible.** Semantic landmarks, a skip link, visible focus rings, AA colour contrast, labelled icon buttons, alt text on every photo, and all motion disabled under `prefers-reduced-motion`.
-- **Progressive enhancement.** The quote form posts straight to FormSubmit and redirects to `/thanks` with JavaScript off. With JavaScript on, it sends in the background and confirms in place.
+- **Demo-safe quote form.** Because this deployment is a portfolio piece, the form is front-end only: it validates and confirms in place, but its fields have no names and nothing is posted, so no enquiry ever reaches the studio. Visitors are pointed to call or WhatsApp instead.
 
 ## Screenshots
 
@@ -53,7 +53,6 @@ The site is prerendered to static HTML and served by Cloudflare's network as sta
 | Images    | `astro:assets` with Sharp: AVIF and WebP at build time                                                |
 | Fonts     | Astro Fonts API, self-hosted Archivo and Instrument Serif                                             |
 | Hosting   | Cloudflare Workers static assets, configured in [`wrangler.jsonc`](wrangler.jsonc)                    |
-| Forms     | [FormSubmit](https://formsubmit.co)                                                                   |
 | Tooling   | `astro check`, Prettier (Astro and Tailwind plugins), Wrangler                                        |
 
 There are no runtime dependencies. Everything in `package.json` is build tooling.
@@ -72,7 +71,7 @@ src/
 │   ├── offer.ts       # Services, packages, add-ons, process, FAQs and reviews
 │   └── work.ts        # Portfolio projects and their write-ups
 ├── layouts/Base.astro # <head>, SEO tags, fonts, header and footer
-├── pages/             # index, thanks, 404, robots.txt and sitemap.xml
+├── pages/             # index, 404, robots.txt and sitemap.xml
 └── styles/global.css  # Tailwind entry, theme tokens and utilities
 public/                # Favicon, share image and Cloudflare _headers
 ```

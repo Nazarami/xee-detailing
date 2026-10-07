@@ -166,7 +166,7 @@ export const faqs = [
 	},
 	{
 		q: 'How much does it cost?',
-		a: 'Every car is different, so we quote based on its size, condition and what you’re after. Send a few details through the form or WhatsApp and we’ll reply with a personalised quote, usually within a few hours during business hours.'
+		a: 'Every car is different, so we quote based on its size, condition and what you’re after. Call or WhatsApp with a few details and we’ll reply with a personalised quote, usually within a few hours during business hours.'
 	},
 	{
 		q: 'Where are you, and when are you open?',

@@ -38,9 +38,9 @@ export default defineConfig({
 				"default-src 'self'",
 				"img-src 'self' data:",
 				"font-src 'self'",
-				// FormSubmit receives the quote form; Cloudflare Web Analytics reports page views.
-				"connect-src 'self' https://formsubmit.co https://cloudflareinsights.com",
-				"form-action 'self' https://formsubmit.co",
+				// Cloudflare Web Analytics reports page views.
+				"connect-src 'self' https://cloudflareinsights.com",
+				"form-action 'self'",
 				"base-uri 'self'",
 				"object-src 'none'"
 			],
