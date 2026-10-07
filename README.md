@@ -10,7 +10,7 @@ The website for [Xee Detailing](https://xeedetailing.com), a Melbourne car detai
 - [Tailwind CSS 4](https://tailwindcss.com)
 - TypeScript
 - Self-hosted fonts: Archivo (variable width) and Instrument Serif
-- Deployed on Netlify (`@sveltejs/adapter-netlify`)
+- Hosted free on Cloudflare (`@sveltejs/adapter-static`)
 
 ## Development
 
@@ -21,6 +21,25 @@ yarn check      # type-check
 yarn format     # prettier
 yarn build      # production build into ./build
 ```
+
+## Deploying to Cloudflare (free)
+
+The site builds to plain static files in `./build`, which Cloudflare's free plan serves with no limits on bandwidth or requests.
+
+**Option A: deploy from GitHub (recommended).** Cloudflare redeploys automatically on every push.
+
+1. In the Cloudflare dashboard go to **Workers & Pages → Create → Import a repository** and pick this repo.
+2. Set the build command to `yarn build`. The deploy command is `npx wrangler deploy`, which reads `wrangler.jsonc`.
+3. Deploy, then add `xeedetailing.com` under the project's **Settings → Domains & Routes**.
+
+**Option B: deploy from your machine.**
+
+```sh
+npx wrangler login
+yarn deploy
+```
+
+Cache headers live in `static/_headers`.
 
 ## Editing content
 
