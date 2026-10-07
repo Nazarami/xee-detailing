@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import nxtzen from '../assets/brands/nxtzen.png';
+import azura from '../assets/brands/azura.png';
+import carpro from '../assets/brands/carpro.png';
+
+const brands = [
+	{
+		logo: nxtzen,
+		name: 'NXTZEN',
+		role: 'Ceramic & graphene coatings',
+		height: 22,
+		cls: 'h-[22px]'
+	},
+	{ logo: azura, name: 'Azura', role: 'Paint protection film', height: 30, cls: 'h-[30px]' },
+	{ logo: carpro, name: 'CarPro', role: 'Wash products', height: 20, cls: 'h-[20px]' }
+];
+---
+
+<section class="border-y border-line bg-ink-2" aria-labelledby="brands-heading">
+	<div class="container-x flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between md:gap-10">
+		<h2 id="brands-heading" class="text-sm text-mute">
+			Products we trust on every car
+		</h2>
+		<ul class="grid grid-cols-3 items-center gap-6 md:flex md:gap-14">
+			{brands.map((b) => (
+				<li class="flex flex-col items-start gap-2">
+					<Image
+						src={b.logo}
+						alt={b.name}
+						height={b.height}
+						densities={[1, 2]}
+						class:list={['w-auto opacity-90', b.cls]}
+					/>
+					<span class="text-[0.7rem] text-dim">{b.role}</span>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>

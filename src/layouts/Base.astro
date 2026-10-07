@@ -1,0 +1,70 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	/** Keep utility pages like /thanks out of search results. */
+	noindex?: boolean;
+	/** schema.org objects for this page. */
+	structuredData?: object;
+}
+
+const { title, description, noindex = false, structuredData } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.jpg', Astro.site);
+---
+
+<!doctype html>
+<html lang="en-AU">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		{noindex && <meta name="robots" content="noindex" />}
+		<meta name="theme-color" content="#0a0a0b" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="sitemap" href="/sitemap.xml" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Xee Detailing" />
+		<meta property="og:locale" content="en_AU" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta
+			property="og:image:alt"
+			content="A Porsche 911 under the light tunnel at the Xee Detailing studio"
+		/>
+		<meta name="twitter:card" content="summary_large_image" />
+
+		<Font cssVariable="--font-archivo" preload />
+		<Font cssVariable="--font-instrument" />
+
+		{structuredData && (
+			<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		)}
+	</head>
+	<body>
+		<a
+			href="#main"
+			class="sr-only z-[70] rounded-full bg-ember px-5 py-3 font-semibold text-ink focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+		>
+			Skip to content
+		</a>
+		<Header />
+		<main id="main">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,24 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-2.5', className]}>
+	<svg class="size-8 shrink-0" viewBox="0 0 40 40" aria-hidden="true">
+		<polygon points="26,4 36,4 14,36 4,36" fill="var(--color-ember)"></polygon>
+		<polygon
+			points="4,4 14,4 36,36 26,36"
+			fill="var(--color-bone)"
+			stroke="var(--color-ink)"
+			stroke-width="3"
+			paint-order="stroke"
+		></polygon>
+	</svg>
+	<span class="flex flex-col leading-none">
+		<span class="font-wide text-[1.3rem] font-black tracking-tight">XEE</span>
+		<span class="mt-0.5 text-[0.55rem] font-semibold tracking-[0.42em] text-mute">DETAILING</span>
+	</span>
+</span>

@@ -1,0 +1,217 @@
+---
+import { Image, Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { work } from '../data/work';
+import { business } from '../data/site';
+
+/** The quote form option that matches a project's service, if any. */
+const packageFor = (service: string) =>
+	service.endsWith('Protection') ? service.replace(' Protection', '') : 'Paint protection film';
+---
+
+<section id="work" class="py-24 md:py-32" aria-labelledby="work-heading">
+	<div class="container-x">
+		<div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+			<SectionHeading eyebrow="Our work" id="work-heading">
+				Recently in the <span class="serif-accent">studio.</span>
+				<Fragment slot="lead">
+					Real cars, real packages. Open any project to see the photos and exactly what was done.
+				</Fragment>
+			</SectionHeading>
+			<a
+				href={business.socials.instagram}
+				target="_blank"
+				rel="noopener"
+				class="reveal btn-ghost shrink-0 self-start md:self-auto"
+			>
+				<Icon name="instagram" class="size-4" /> More on Instagram
+			</a>
+		</div>
+
+		<ul class="mt-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
+			{work.map((p, i) => (
+				<li class="reveal">
+					<button
+						type="button"
+						commandfor={`project-${p.slug}`}
+						command="show-modal"
+						class="group relative block w-full overflow-hidden rounded-[1.25rem] bg-ink-3 text-left sm:rounded-[1.5rem]"
+					>
+						<Picture
+							src={p.photos[0]!}
+							alt=""
+							formats={['avif']}
+							fallbackFormat="webp"
+							widths={[360, 540, 720]}
+							sizes="(min-width: 1280px) 300px, (min-width: 768px) 33vw, 50vw"
+							loading={i < 4 ? 'eager' : 'lazy'}
+							class="aspect-[4/5] w-full object-cover transition duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-[1.05]"
+						/>
+						<span class="absolute inset-0 bg-gradient-to-t from-ink from-10% via-ink/55 via-35% to-transparent to-65%" />
+						<span class="absolute inset-x-0 bottom-0 p-3.5 sm:p-5">
+							<span class="block text-[0.65rem] font-semibold tracking-[0.16em] text-ember uppercase sm:text-xs">
+								{p.service}
+							</span>
+							<span class="font-wide mt-1 block text-sm leading-tight font-bold tracking-tight sm:text-lg">
+								{p.car}
+							</span>
+							<span class="mt-2 hidden items-center gap-1.5 text-xs text-mute sm:flex">
+								{p.photos.length} photos <Icon name="arrow" class="size-3.5" />
+							</span>
+						</span>
+					</button>
+				</li>
+			))}
+		</ul>
+	</div>
+
+	{work.map((p) => (
+		<dialog
+			id={`project-${p.slug}`}
+			class="project m-0 h-dvh max-h-none w-screen max-w-none bg-ink p-0 text-bone lg:m-auto lg:h-[min(52rem,92dvh)] lg:w-[min(84rem,94vw)] lg:rounded-[1.75rem] lg:border lg:border-line"
+			aria-labelledby={`project-${p.slug}-title`}
+		>
+			<div class="grid h-full grid-rows-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(0,1fr)_24rem] lg:grid-rows-1">
+				<div class="relative min-h-0 bg-black">
+					<ul class="track flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none]">
+						{p.photos.map((photo, n) => (
+							<li class="grid h-full w-full shrink-0 snap-center place-items-center">
+								<Image
+									src={photo}
+									alt={`${p.car}, photo ${n + 1} of ${p.photos.length}`}
+									widths={[720, 1200, 1800]}
+									sizes="(min-width: 1024px) 60vw, 100vw"
+									quality={72}
+									loading="lazy"
+									class="max-h-full w-auto object-contain"
+								/>
+							</li>
+						))}
+					</ul>
+					<div class="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between p-4">
+						<span
+							class="counter pointer-events-auto rounded-full bg-ink/70 px-3 py-1.5 text-xs tabular-nums backdrop-blur"
+							aria-live="polite"
+						>
+							1 / {p.photos.length}
+						</span>
+						<span class="pointer-events-auto flex gap-2">
+							<button
+								type="button"
+								data-step="-1"
+								class="grid size-11 place-items-center rounded-full bg-ink/70 backdrop-blur transition hover:bg-ember hover:text-ink"
+								aria-label="Previous photo"
+							>
+								<Icon name="chevron" class="size-5 rotate-180" />
+							</button>
+							<button
+								type="button"
+								data-step="1"
+								class="grid size-11 place-items-center rounded-full bg-ink/70 backdrop-blur transition hover:bg-ember hover:text-ink"
+								aria-label="Next photo"
+							>
+								<Icon name="chevron" class="size-5" />
+							</button>
+						</span>
+					</div>
+				</div>
+
+				<div class="max-h-[42dvh] overflow-y-auto border-t border-line p-6 sm:p-8 lg:max-h-none lg:border-t-0 lg:border-l">
+					<div class="flex items-start justify-between gap-4">
+						<p class="eyebrow pt-1">{p.service}</p>
+						<button
+							type="button"
+							commandfor={`project-${p.slug}`}
+							command="close"
+							class="-mt-1 -mr-1 grid size-11 shrink-0 place-items-center rounded-full border border-line transition hover:border-bone/60"
+							aria-label="Close"
+						>
+							<Icon name="close" />
+						</button>
+					</div>
+					<h3
+						id={`project-${p.slug}-title`}
+						class="font-wide mt-3 text-2xl leading-tight font-black tracking-tight"
+					>
+						{p.car}
+					</h3>
+					<p class="mt-4 leading-relaxed text-mute">{p.summary}</p>
+					<h4 class="mt-7 text-sm font-semibold">What we did</h4>
+					<ul class="mt-3 space-y-2.5 text-sm">
+						{p.done.map((item) => (
+							<li class="flex gap-3">
+								<Icon name="check" class="mt-0.5 size-4 shrink-0 text-ember" />
+								{item}
+							</li>
+						))}
+					</ul>
+					<a href="#contact" data-package={packageFor(p.service)} class="btn-primary mt-8 w-full">
+						Get a quote like this
+					</a>
+				</div>
+			</div>
+		</dialog>
+	))}
+</section>
+
+<style>
+	.project::backdrop {
+		background: rgb(10 10 11 / 0.88);
+	}
+	@media (prefers-reduced-motion: no-preference) {
+		.project[open] {
+			animation: project-in 0.45s var(--ease-out-expo);
+		}
+	}
+	@keyframes project-in {
+		from {
+			opacity: 0;
+			scale: 0.97;
+		}
+	}
+</style>
+
+<script>
+	const dialogs = document.querySelectorAll<HTMLDialogElement>('dialog.project');
+
+	// Invoker commands (commandfor/command) open and close the dialogs natively.
+	// Older browsers get the same behaviour from this small fallback.
+	if (!('command' in HTMLButtonElement.prototype)) {
+		document.querySelectorAll<HTMLButtonElement>('button[commandfor]').forEach((button) =>
+			button.addEventListener('click', () => {
+				const dialog = document.getElementById(button.getAttribute('commandfor') ?? '');
+				if (!(dialog instanceof HTMLDialogElement)) return;
+				if (button.getAttribute('command') === 'close') dialog.close();
+				else dialog.showModal();
+			})
+		);
+	}
+
+	dialogs.forEach((dialog) => {
+		const track = dialog.querySelector<HTMLElement>('.track')!;
+		const counter = dialog.querySelector<HTMLElement>('.counter')!;
+		const total = track.children.length;
+		const step = (dir: number) => track.scrollBy({ left: dir * track.clientWidth });
+
+		dialog
+			.querySelectorAll<HTMLButtonElement>('[data-step]')
+			.forEach((button) =>
+				button.addEventListener('click', () => step(Number(button.dataset.step)))
+			);
+		dialog.addEventListener('keydown', (e) => {
+			if (e.key === 'ArrowRight') step(1);
+			if (e.key === 'ArrowLeft') step(-1);
+		});
+		track.addEventListener('scroll', () => {
+			const index = Math.round(track.scrollLeft / track.clientWidth) + 1;
+			counter.textContent = `${Math.min(index, total)} / ${total}`;
+		});
+		// A click on the backdrop (outside the panel) closes the dialog.
+		dialog.addEventListener('click', (e) => {
+			if (e.target === dialog) dialog.close();
+		});
+		dialog.addEventListener('close', () => track.scrollTo({ left: 0 }));
+		dialog.querySelector('a[href="#contact"]')?.addEventListener('click', () => dialog.close());
+	});
+</script>

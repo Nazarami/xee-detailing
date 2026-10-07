@@ -1,0 +1,228 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { business, addressLine } from '../data/site';
+import { packages } from '../data/offer';
+
+const thanks = new URL('/thanks', Astro.site).href;
+const services = [
+	...packages.map((p) => p.name),
+	'Paint protection film',
+	'Colour change PPF',
+	'Paint correction',
+	'Window tint',
+	'Something else'
+];
+
+const field =
+	'w-full rounded-xl border border-line bg-ink px-4 py-3.5 text-base transition outline-none placeholder:text-dim focus:border-ember aria-[invalid=true]:border-ember';
+const label = 'mb-2 block text-sm font-medium text-mute';
+---
+
+<section
+	id="contact"
+	class="relative overflow-hidden border-t border-line bg-ink-2 py-24 md:py-32"
+	aria-labelledby="contact-heading"
+>
+	<div class="pointer-events-none absolute -bottom-48 -left-32 size-[34rem] rounded-full bg-ember/12 blur-[160px]"></div>
+	<div class="relative container-x grid gap-14 lg:grid-cols-5 lg:gap-16">
+		<div class="lg:col-span-2">
+			<SectionHeading eyebrow="Get a quote" id="contact-heading">
+				Let’s book your car <span class="serif-accent">in.</span>
+				<Fragment slot="lead">
+					Tell us about the car and what you’re after. We usually reply within a few hours during
+					business hours.
+				</Fragment>
+			</SectionHeading>
+
+			<ul class="reveal mt-10 space-y-3">
+				<li>
+					<a href={`tel:${business.phoneE164}`} class="contact-row group">
+						<span class="contact-icon">
+							<Icon name="phone" />
+						</span>
+						<span>
+							<span class="block text-sm text-dim">Call</span>
+							{business.phone}
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href={business.whatsapp} target="_blank" rel="noopener" class="contact-row group">
+						<span class="contact-icon">
+							<Icon name="whatsapp" />
+						</span>
+						<span>
+							<span class="block text-sm text-dim">WhatsApp</span>Message us
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href={`mailto:${business.email}`} class="contact-row group">
+						<span class="contact-icon">
+							<Icon name="mail" />
+						</span>
+						<span class="break-all">
+							<span class="block text-sm text-dim">Email</span>
+							{business.email}
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href={business.maps} target="_blank" rel="noopener" class="contact-row group">
+						<span class="contact-icon">
+							<Icon name="pin" />
+						</span>
+						<span>
+							<span class="block text-sm text-dim">Studio · Get directions</span>
+							{addressLine}
+						</span>
+					</a>
+				</li>
+			</ul>
+
+			<dl class="reveal mt-8 grid grid-cols-[auto_1fr] gap-x-8 gap-y-2 text-sm">
+				{business.hours.map((h) => (
+					<>
+						<dt class="text-dim">{h.days}</dt>
+						<dd>{h.time}</dd>
+					</>
+				))}
+			</dl>
+		</div>
+
+		<form
+			id="quote-form"
+			action={`https://formsubmit.co/${business.email}`}
+			method="POST"
+			class="reveal relative grid gap-5 self-start rounded-[2rem] border border-line bg-ink-3/60 p-6 backdrop-blur sm:grid-cols-2 sm:p-10 lg:col-span-3"
+		>
+			<input
+				type="hidden"
+				name="_subject"
+				value="New quote request from the Xee Detailing website"
+			/>
+			<input type="hidden" name="_template" value="table" />
+			<input type="hidden" name="_next" value={thanks} />
+			<input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+
+			<div>
+				<label for="name" class={label}>
+					Name
+				</label>
+				<input id="name" name="Name" required autocomplete="name" class={field} />
+			</div>
+			<div>
+				<label for="phone" class={label}>
+					Phone
+				</label>
+				<input
+					id="phone"
+					name="Phone"
+					type="tel"
+					required
+					autocomplete="tel"
+					placeholder="04xx xxx xxx"
+					class={field}
+				/>
+			</div>
+			<div class="sm:col-span-2">
+				<label for="email" class={label}>
+					Email
+				</label>
+				<input id="email" name="Email" type="email" required autocomplete="email" class={field} />
+			</div>
+			<div>
+				<label for="vehicle" class={label}>
+					Vehicle
+				</label>
+				<input id="vehicle" name="Vehicle" placeholder="e.g. 2025 Porsche Macan" class={field} />
+			</div>
+			<div>
+				<label for="service" class={label}>
+					Interested in
+				</label>
+				<div class="relative">
+					<select id="service" name="Interested in" class:list={[field, 'appearance-none pr-10']}>
+						<option value="">Not sure yet</option>
+						{services.map((s) => (
+							<option value={s}>{s}</option>
+						))}
+					</select>
+					<Icon
+						name="chevron"
+						class="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 rotate-90 text-mute"
+					/>
+				</div>
+			</div>
+			<div class="sm:col-span-2">
+				<label for="message" class={label}>
+					Anything else we should know?
+				</label>
+				<textarea
+					id="message"
+					name="Message"
+					rows="4"
+					placeholder="Condition of the paint, when you'd like it done, questions…"
+					class:list={[field, 'resize-y']}
+				></textarea>
+			</div>
+			<div class="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+				<p class="text-sm text-dim">We only use your details to reply to you.</p>
+				<button type="submit" class="btn-primary disabled:opacity-60">
+					Send enquiry <Icon name="arrow" class="size-4" />
+				</button>
+			</div>
+			<p class="form-status text-sm sm:col-span-2" role="status" aria-live="polite"></p>
+
+			<div class="form-done absolute inset-0 hidden flex-col items-center justify-center rounded-[2rem] bg-ink-3 p-8 text-center">
+				<span class="grid size-14 place-items-center rounded-full bg-ember text-ink">
+					<Icon name="check" class="size-7" />
+				</span>
+				<p class="font-wide mt-6 text-2xl font-black">Thanks, we’ve got it.</p>
+				<p class="mt-3 max-w-sm text-mute">
+					Huss will be in touch shortly, usually within a few hours during business hours.
+				</p>
+			</div>
+		</form>
+	</div>
+</section>
+
+<style>
+	@reference "../styles/global.css";
+	.contact-row {
+		@apply flex items-center gap-4 rounded-2xl p-2 font-semibold transition hover:bg-bone/5;
+	}
+	.contact-icon {
+		@apply grid size-12 shrink-0 place-items-center rounded-full border border-line transition group-hover:border-ember group-hover:bg-ember group-hover:text-ink;
+	}
+</style>
+
+<script>
+	import { business } from '../data/site';
+
+	// Without JavaScript the form posts straight to FormSubmit and lands on /thanks.
+	// With it, the enquiry is sent in the background and confirmed in place.
+	const form = document.querySelector<HTMLFormElement>('#quote-form');
+	form?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		const status = form.querySelector<HTMLElement>('.form-status')!;
+		const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+		button.disabled = true;
+		status.textContent = 'Sending…';
+
+		try {
+			const response = await fetch(`https://formsubmit.co/ajax/${business.email}`, {
+				method: 'POST',
+				headers: { Accept: 'application/json' },
+				body: new FormData(form)
+			});
+			if (!response.ok) throw new Error(String(response.status));
+			form.querySelector('.form-done')!.classList.replace('hidden', 'flex');
+			status.textContent = 'Thanks, your enquiry has been sent.';
+		} catch {
+			status.textContent = `Sorry, that didn’t send. Please call or WhatsApp us on ${business.phone}.`;
+			button.disabled = false;
+		}
+	});
+</script>

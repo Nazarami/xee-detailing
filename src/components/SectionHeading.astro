@@ -1,0 +1,24 @@
+---
+interface Props {
+	eyebrow: string;
+	id?: string;
+	class?: string;
+}
+
+const { eyebrow, id, class: className = '' } = Astro.props;
+---
+
+<div class:list={['reveal max-w-3xl', className]}>
+	<p class="eyebrow">{eyebrow}</p>
+	<h2
+		id={id}
+		class="font-wide mt-5 text-[clamp(2rem,5vw,3.75rem)] leading-[1] font-black tracking-[-0.03em]"
+	>
+		<slot />
+	</h2>
+	{Astro.slots.has('lead') && (
+		<p class="mt-6 max-w-2xl text-lg leading-relaxed text-mute">
+			<slot name="lead" />
+		</p>
+	)}
+</div>

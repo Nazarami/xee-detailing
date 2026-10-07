@@ -1,0 +1,67 @@
+---
+import { Picture } from 'astro:assets';
+import SectionHeading from './SectionHeading.astro';
+import huss from '../assets/photos/huss-studio.jpg';
+import { business } from '../data/site';
+import { process } from '../data/offer';
+---
+
+<section
+	id="about"
+	class="border-y border-line bg-ink-2 py-24 md:py-32"
+	aria-labelledby="about-heading"
+>
+	<div class="container-x grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+		<figure class="reveal relative">
+			<div class="overflow-hidden rounded-[2rem]">
+				<Picture
+					src={huss}
+					alt="Huss Sarwari preparing a polishing pad beside an orange supercar in the studio"
+					formats={['avif']}
+					fallbackFormat="webp"
+					widths={[480, 720, 1080]}
+					sizes="(min-width: 1024px) 560px, 100vw"
+					class="aspect-[4/5] w-full object-cover object-[42%_50%]"
+				/>
+			</div>
+			<figcaption class="absolute -bottom-6 left-5 max-w-[17rem] rounded-2xl bg-ember p-5 text-ink shadow-2xl sm:left-auto sm:-right-6">
+				<p class="font-wide text-sm leading-snug font-bold">
+					“If you want it done right, you’re in the right place.”
+				</p>
+				<p class="mt-2 text-xs font-semibold opacity-75">{business.founder}, founder</p>
+			</figcaption>
+		</figure>
+
+		<div>
+			<SectionHeading eyebrow="About the studio" id="about-heading">
+				Not a volume shop. <span class="serif-accent">Never will be.</span>
+			</SectionHeading>
+			<div class="reveal mt-8 space-y-5 text-lg leading-relaxed text-mute">
+				<p>
+					{business.founder} got hooked on cars the day he got his Ps, and spent years cleaning,
+					refining and learning on his own car. He launched Xee Detailing professionally at 22 with
+					one goal: to do things properly, not quickly.
+				</p>
+				<p>
+					Every car that comes into the Hallam studio gets his time and attention. No rushed jobs,
+					no shortcuts, and products he trusts: Huss is an authorised NXTZEN installer.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-x mt-28">
+		<p class="reveal eyebrow">How every job runs</p>
+		<ol class="mt-10 grid gap-px overflow-hidden rounded-[1.75rem] border border-line bg-line md:grid-cols-4">
+			{process.map((step, i) => (
+				<li class="reveal bg-ink-2 p-7">
+					<span class="font-wide text-4xl font-black text-ember/80">
+						{String(i + 1).padStart(2, '0')}
+					</span>
+					<h3 class="font-wide mt-5 text-lg font-bold">{step.title}</h3>
+					<p class="mt-2 leading-relaxed text-mute">{step.body}</p>
+				</li>
+			))}
+		</ol>
+	</div>
+</section>

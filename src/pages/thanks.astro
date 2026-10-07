@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { business } from '../data/site';
+---
+
+<Base
+	title="Thanks for your enquiry | Xee Detailing"
+	description="Your quote request has been sent to Xee Detailing."
+	noindex
+>
+	<section class="container-x grid min-h-[80svh] place-items-center pt-18 text-center">
+		<div class="max-w-xl">
+			<span class="mx-auto grid size-16 place-items-center rounded-full bg-ember text-ink">
+				<Icon name="check" class="size-8" />
+			</span>
+			<h1 class="font-wide mt-8 text-4xl font-black tracking-tight sm:text-5xl">
+				Thanks, we’ve got it.
+			</h1>
+			<p class="mt-5 text-lg text-mute">
+				{business.owner} will be in touch shortly, usually within a few hours during business hours.
+				Need us sooner? Call {business.phone}.
+			</p>
+			<div class="mt-10 flex flex-wrap justify-center gap-3">
+				<a href="/" class="btn-primary">
+					Back to the site
+				</a>
+				<a href="/#work" class="btn-ghost">
+					See our work
+				</a>
+			</div>
+		</div>
+	</section>
+</Base>

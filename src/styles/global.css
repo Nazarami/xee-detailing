@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-ink: #0a0a0b;
+	--color-ink-2: #111114;
+	--color-ink-3: #1a1a1f;
+	--color-line: #2a2a31;
+	--color-bone: #f4f2ed;
+	--color-mute: #b0aea8;
+	--color-dim: #8b8984;
+	--color-ember: #ff5a3a;
+	--color-ember-deep: #e2401f;
+
+	--font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+	--font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	--breakpoint-xs: 26rem;
+}
+
+@layer base {
+	html {
+		color-scheme: dark;
+		scroll-behavior: smooth;
+		scroll-padding-top: 5rem;
+		-webkit-text-size-adjust: 100%;
+		background: var(--color-ink);
+	}
+	body {
+		@apply bg-ink font-sans text-bone antialiased;
+		text-rendering: optimizeLegibility;
+	}
+	::selection {
+		@apply bg-ember text-ink;
+	}
+	:focus-visible {
+		@apply rounded-sm outline-2 outline-offset-4 outline-ember;
+	}
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+	p {
+		text-wrap: pretty;
+	}
+	img {
+		@apply h-auto max-w-full;
+	}
+	dialog::backdrop {
+		background: rgb(10 10 11 / 0.85);
+		backdrop-filter: blur(6px);
+	}
+}
+
+@utility container-x {
+	@apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+}
+
+/* Archivo's width axis at full stretch: the expanded display face. */
+@utility font-wide {
+	font-stretch: 125%;
+}
+
+@utility eyebrow {
+	@apply text-xs font-semibold tracking-[0.24em] text-ember uppercase;
+}
+
+@utility btn {
+	@apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition duration-300 select-none;
+}
+
+@utility btn-primary {
+	@apply btn bg-ember text-ink hover:bg-bone active:scale-[0.98];
+}
+
+@utility btn-ghost {
+	@apply btn border border-line text-bone hover:border-bone/60 hover:bg-bone/5 active:scale-[0.98];
+}
+
+@utility serif-accent {
+	@apply font-serif font-normal italic;
+	font-stretch: normal;
+	letter-spacing: 0;
+}
+
+/* Scroll-driven reveal: no JavaScript, and content stays visible where unsupported. */
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.reveal {
+			animation: reveal both var(--ease-out-expo);
+			animation-timeline: view();
+			animation-range: entry 0% entry 40%;
+		}
+	}
+
+	.hero-in {
+		animation: hero-in 1s var(--d, 0ms) both var(--ease-out-expo);
+	}
+}
+
+@keyframes reveal {
+	from {
+		opacity: 0;
+		translate: 0 2.5rem;
+	}
+}
+
+@keyframes hero-in {
+	from {
+		opacity: 0;
+		translate: 0 1.75rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+	}
+}

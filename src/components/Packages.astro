@@ -1,0 +1,103 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { packages, everyPackage, addOns } from '../data/offer';
+---
+
+<section
+	id="packages"
+	class="relative overflow-hidden border-y border-line bg-ink-2 py-24 md:py-32"
+	aria-labelledby="packages-heading"
+>
+	<div class="pointer-events-none absolute top-1/4 -right-40 size-[34rem] rounded-full bg-ember/10 blur-[150px]"></div>
+	<div class="relative container-x">
+		<SectionHeading eyebrow="Protection packages" id="packages-heading">
+			Pick your level of <span class="serif-accent">protection.</span>
+			<Fragment slot="lead">
+				Every package starts with a full wash, decontamination and paint correction. Pricing depends
+				on the size and condition of your car, so we quote each one individually.
+			</Fragment>
+		</SectionHeading>
+
+		<ul class="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+			{packages.map((pkg) => (
+				<li
+					class:list={[
+						'reveal relative flex flex-col rounded-[1.75rem] border p-7',
+						pkg.featured ? 'border-ember bg-ink-3 shadow-2xl shadow-ember/10' : 'border-line bg-ink'
+					]}
+				>
+					{pkg.featured && (
+						<span class="absolute -top-3 left-7 rounded-full bg-ember px-3 py-1 text-[0.65rem] font-bold tracking-widest text-ink uppercase">
+							Most popular
+						</span>
+					)}
+					<h3 class="font-wide text-2xl font-black tracking-tight">{pkg.name}</h3>
+					<p class="mt-2 min-h-12 text-sm leading-relaxed text-mute">{pkg.tagline}</p>
+
+					<div class="mt-6 flex items-end gap-3 border-y border-line py-5">
+						<span class="font-wide text-5xl leading-none font-black tracking-tight">
+							{pkg.coating.years}
+						</span>
+						<span class="pb-0.5 text-sm leading-tight">
+							<span class="block font-semibold">year coating</span>
+							<span class="text-mute">{pkg.coating.product}</span>
+						</span>
+					</div>
+
+					<ul class="mt-6 flex-1 space-y-3 text-sm">
+						{pkg.includes.map((item) => (
+							<li class="flex gap-3">
+								<Icon name="check" class="mt-0.5 size-4 shrink-0 text-ember" />
+								{item}
+							</li>
+						))}
+					</ul>
+
+					<a
+						href="#contact"
+						data-package={pkg.name}
+						class:list={['mt-8 w-full', pkg.featured ? 'btn-primary' : 'btn-ghost']}
+					>
+						Enquire about {pkg.name}
+					</a>
+				</li>
+			))}
+		</ul>
+
+		<div class="mt-8 grid gap-5 lg:grid-cols-2">
+			<div class="reveal rounded-[1.75rem] border border-line p-7">
+				<h3 class="font-semibold">Included with every package</h3>
+				<ul class="mt-5 grid gap-x-6 gap-y-3 text-sm text-mute sm:grid-cols-2">
+					{everyPackage.map((item) => (
+						<li class="flex gap-3">
+							<Icon name="check" class="mt-0.5 size-4 shrink-0 text-ember" />
+							{item}
+						</li>
+					))}
+				</ul>
+			</div>
+			<div class="reveal rounded-[1.75rem] border border-line p-7">
+				<h3 class="font-semibold">Popular add-ons</h3>
+				<ul class="mt-5 flex flex-wrap gap-2 text-sm">
+					{addOns.map((item) => (
+						<li class="flex items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-mute">
+							<Icon name="plus" class="size-3.5 text-ember" />
+							{item}
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	// Choosing a package pre-selects it in the quote form.
+	document.querySelectorAll<HTMLAnchorElement>('[data-package]').forEach((link) =>
+		link.addEventListener('click', () => {
+			const select = document.querySelector<HTMLSelectElement>('#service');
+			if (select) select.value = link.dataset.package ?? '';
+		})
+	);
+</script>

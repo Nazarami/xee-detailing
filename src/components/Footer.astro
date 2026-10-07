@@ -1,0 +1,114 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { business, nav, addressLine } from '../data/site';
+
+const socials = [
+	{ href: business.socials.instagram, label: 'Instagram', icon: 'instagram' },
+	{ href: business.socials.facebook, label: 'Facebook', icon: 'facebook' },
+	{ href: business.socials.tiktok, label: 'TikTok', icon: 'tiktok' }
+] as const;
+---
+
+<footer class="border-t border-line pb-24 lg:pb-0">
+	<div class="container-x py-16">
+		<div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+			<div class="lg:col-span-2">
+				<Logo />
+				<p class="mt-5 max-w-sm text-sm leading-relaxed text-mute">
+					NXTZEN certified paint correction, ceramic and graphene coatings and paint protection film
+					in Hallam, Melbourne.
+				</p>
+				<div class="mt-6 flex gap-3">
+					{socials.map((s) => (
+						<a
+							href={s.href}
+							target="_blank"
+							rel="noopener"
+							aria-label={s.label}
+							class="grid size-11 place-items-center rounded-full border border-line transition hover:border-ember hover:bg-ember hover:text-ink"
+						>
+							<Icon name={s.icon} />
+						</a>
+					))}
+				</div>
+			</div>
+			<div class="text-sm">
+				<h2 class="font-semibold">Visit</h2>
+				<address class="mt-4 space-y-2 text-mute not-italic">
+					<a href={business.maps} target="_blank" rel="noopener" class="block hover:text-bone">
+						{addressLine}
+					</a>
+					<a href={`tel:${business.phoneE164}`} class="block hover:text-bone">
+						{business.phone}
+					</a>
+					<a href={`mailto:${business.email}`} class="block break-all hover:text-bone">
+						{business.email}
+					</a>
+				</address>
+			</div>
+			<div class="text-sm">
+				<h2 class="font-semibold">Explore</h2>
+				<ul class="mt-4 space-y-2 text-mute">
+					{nav.map((link) => (
+						<li>
+							<a href={link.href} class="hover:text-bone">
+								{link.label}
+							</a>
+						</li>
+					))}
+					<li>
+						<a href="/#contact" class="hover:text-bone">
+							Get a quote
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="mt-14 flex flex-col justify-between gap-3 border-t border-line pt-6 text-xs text-dim sm:flex-row">
+			<p>
+				© {new Date().getFullYear()}
+				{business.name}, a trading name of {business.legalName}.
+			</p>
+			<p>
+				Website by{' '}
+				<a href="https://amirnaz.com" class="underline-offset-4 hover:text-bone hover:underline">
+					Amir
+				</a>
+			</p>
+		</div>
+	</div>
+</footer>
+
+<!-- Phones: quick actions stay within thumb reach once the hero scrolls away. -->
+<div class="mobile-cta fixed inset-x-0 bottom-0 z-40 border-t border-line bg-ink/90 p-3 backdrop-blur-xl lg:hidden">
+	<div class="mx-auto grid max-w-md grid-cols-[auto_1fr] gap-3">
+		<a
+			href={`tel:${business.phoneE164}`}
+			class="btn-ghost px-5"
+			aria-label={`Call ${business.phone}`}
+		>
+			<Icon name="phone" class="size-4" /> Call
+		</a>
+		<a href="/#contact" class="btn-primary">
+			Get a free quote
+		</a>
+	</div>
+</div>
+
+<style>
+	@supports (animation-timeline: scroll()) {
+		.mobile-cta {
+			animation: cta-in linear both;
+			animation-timeline: scroll();
+			animation-range: 50vh 70vh;
+		}
+	}
+	@keyframes cta-in {
+		from {
+			opacity: 0;
+			translate: 0 100%;
+			visibility: hidden;
+		}
+	}
+</style>

@@ -1,0 +1,116 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { business, nav } from '../data/site';
+---
+
+<header class="site-header fixed inset-x-0 top-0 z-50 border-b">
+	<nav class="container-x flex h-18 items-center justify-between gap-6" aria-label="Main">
+		<a href="/" aria-label="Xee Detailing home">
+			<Logo />
+		</a>
+
+		<ul class="hidden items-center gap-8 text-sm lg:flex">
+			{nav.map((link) => (
+				<li>
+					<a href={link.href} class="text-mute transition hover:text-bone">
+						{link.label}
+					</a>
+				</li>
+			))}
+		</ul>
+
+		<div class="flex items-center gap-2 sm:gap-4">
+			<a
+				href={`tel:${business.phoneE164}`}
+				class="hidden text-sm text-mute transition hover:text-bone md:inline"
+			>
+				{business.phone}
+			</a>
+			<a href="/#contact" class="btn-primary hidden min-h-11 px-5 sm:inline-flex">
+				Get a quote
+			</a>
+			<button
+				type="button"
+				popovertarget="menu"
+				class="grid size-11 place-items-center rounded-full border border-line lg:hidden"
+				aria-label="Open menu"
+			>
+				<Icon name="menu" />
+			</button>
+		</div>
+	</nav>
+</header>
+
+<!-- Mobile menu: the native popover API handles open, close, Escape and focus. -->
+<div
+	id="menu"
+	popover
+	class="mobile-menu m-0 h-dvh max-h-none w-screen max-w-none bg-ink p-0 text-bone"
+>
+	<div class="container-x flex h-18 items-center justify-between">
+		<Logo />
+		<button
+			type="button"
+			popovertarget="menu"
+			popovertargetaction="hide"
+			class="grid size-11 place-items-center rounded-full border border-line"
+			aria-label="Close menu"
+		>
+			<Icon name="close" />
+		</button>
+	</div>
+	<nav class="container-x flex flex-col pt-6 pb-10" aria-label="Mobile">
+		{nav.map((link) => (
+			<a
+				href={link.href}
+				class="font-wide border-b border-line py-5 text-2xl font-bold tracking-tight"
+			>
+				{link.label}
+			</a>
+		))}
+		<a href="/#contact" class="btn-primary mt-8 w-full">
+			Get a quote
+		</a>
+		<a href={`tel:${business.phoneE164}`} class="btn-ghost mt-3 w-full">
+			<Icon name="phone" class="size-4" /> Call {business.phone}
+		</a>
+	</nav>
+</div>
+
+<style>
+	.site-header {
+		border-color: color-mix(in oklab, var(--color-line) 70%, transparent);
+		background: color-mix(in oklab, var(--color-ink) 82%, transparent);
+		backdrop-filter: blur(18px);
+	}
+	/* Transparent over the hero, then solid once the page scrolls. */
+	@supports (animation-timeline: scroll()) {
+		.site-header {
+			animation: header-solid linear both;
+			animation-timeline: scroll();
+			animation-range: 0 6rem;
+		}
+	}
+	@keyframes header-solid {
+		from {
+			border-color: transparent;
+			background: transparent;
+			backdrop-filter: none;
+		}
+	}
+	.mobile-menu {
+		inset: 0;
+	}
+	.mobile-menu::backdrop {
+		background: transparent;
+	}
+</style>
+
+<script>
+	// Following a link inside the menu should also close it.
+	const menu = document.getElementById('menu');
+	menu
+		?.querySelectorAll('a')
+		.forEach((link) => link.addEventListener('click', () => menu.hidePopover()));
+</script>

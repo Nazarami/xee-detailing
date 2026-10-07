@@ -2,8 +2,15 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "xee-detailing",
 	"compatibility_date": "2026-10-01",
+	// No Worker script: Cloudflare serves the static build directly, and requests
+	// for static assets are free and unmetered on every plan.
 	"assets": {
-		"directory": "./build",
-		"not_found_handling": "404-page"
-	}
+		"directory": "./dist",
+		"not_found_handling": "404-page",
+		"html_handling": "drop-trailing-slash"
+	},
+	"routes": [{ "pattern": "xee.amirnaz.com", "custom_domain": true }],
+	// Only the custom domain serves the site; the workers.dev and preview URLs stay off.
+	"workers_dev": false,
+	"preview_urls": false
 }

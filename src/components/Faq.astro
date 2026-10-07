@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { faqs } from '../data/offer';
+---
+
+<section id="faq" class="border-t border-line py-24 md:py-32" aria-labelledby="faq-heading">
+	<div class="container-x grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20">
+		<SectionHeading eyebrow="FAQ" id="faq-heading">
+			Good <span class="serif-accent">questions.</span>
+			<Fragment slot="lead">
+				Anything else? Call, message or send the form and Huss will get back to you.
+			</Fragment>
+		</SectionHeading>
+
+		<div class="reveal border-t border-line">
+			{faqs.map((f, i) => (
+				<details name="faq" class="group border-b border-line" open={i === 0}>
+					<summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+						{f.q}
+						<span class="grid size-9 shrink-0 place-items-center rounded-full border border-line transition group-open:rotate-45 group-open:border-ember group-open:text-ember">
+							<Icon name="plus" class="size-4" />
+						</span>
+					</summary>
+					<p class="-mt-1 pr-12 pb-7 leading-relaxed text-mute">{f.a}</p>
+				</details>
+			))}
+		</div>
+	</div>
+</section>

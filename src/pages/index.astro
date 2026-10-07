@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Brands from '../components/Brands.astro';
+import Services from '../components/Services.astro';
+import Packages from '../components/Packages.astro';
+import Work from '../components/Work.astro';
+import About from '../components/About.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
+import { business } from '../data/site';
+import { services } from '../data/offer';
+
+const url = Astro.site!.href;
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'AutomotiveBusiness',
+	'@id': `${url}#business`,
+	name: business.name,
+	legalName: business.legalName,
+	description: business.tagline,
+	url,
+	image: new URL('/og.jpg', url).href,
+	logo: new URL('/apple-touch-icon.png', url).href,
+	telephone: business.phoneE164,
+	email: business.email,
+	hasMap: business.maps,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: business.address.street,
+		addressLocality: business.address.suburb,
+		addressRegion: business.address.region,
+		postalCode: business.address.postcode,
+		addressCountry: business.address.country
+	},
+	areaServed: { '@type': 'City', name: 'Melbourne' },
+	openingHoursSpecification: {
+		'@type': 'OpeningHoursSpecification',
+		dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+		opens: '09:00',
+		closes: '17:00'
+	},
+	founder: { '@type': 'Person', name: business.founder },
+	sameAs: Object.values(business.socials),
+	makesOffer: services.map((s) => ({
+		'@type': 'Offer',
+		itemOffered: { '@type': 'Service', name: s.title }
+	}))
+};
+---
+
+<Base
+	title="Xee Detailing | Ceramic Coating, PPF & Paint Correction in Melbourne"
+	description="NXTZEN certified paint protection studio in Hallam, Melbourne. Ceramic and graphene coatings, paint protection film, colour change PPF and paint correction. Get a free quote."
+	structuredData={structuredData}
+>
+	<Hero />
+	<Brands />
+	<Services />
+	<Packages />
+	<Work />
+	<About />
+	<Reviews />
+	<Faq />
+	<Contact />
+</Base>

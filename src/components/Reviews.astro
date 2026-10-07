@@ -1,0 +1,52 @@
+---
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+import { reviews } from '../data/offer';
+import { business } from '../data/site';
+---
+
+<section id="reviews" class="py-24 md:py-32" aria-labelledby="reviews-heading">
+	<div class="container-x">
+		<div class="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+			<SectionHeading eyebrow="Reviews" id="reviews-heading">
+				Our clients <span class="serif-accent">say it best.</span>
+			</SectionHeading>
+			<a
+				href={business.maps}
+				target="_blank"
+				rel="noopener"
+				class="reveal flex shrink-0 items-center gap-4 self-start rounded-2xl border border-line px-5 py-4 transition hover:border-bone/40 md:self-auto"
+			>
+				<span class="font-wide text-4xl font-black">{business.rating}</span>
+				<span class="text-sm">
+					<span class="flex gap-0.5 text-ember" aria-hidden="true">
+						{Array.from({ length: 5 }, () => (
+							<Icon name="star" class="size-4" />
+						))}
+					</span>
+					<span class="mt-1 block text-mute">Read our Google reviews</span>
+				</span>
+			</a>
+		</div>
+
+		<ul class="mt-14 grid gap-5 lg:grid-cols-3">
+			{reviews.map((r) => (
+				<li class="reveal">
+					<figure class="flex h-full flex-col rounded-[1.75rem] border border-line bg-ink-2 p-8">
+						<span class="flex gap-0.5 text-ember" role="img" aria-label="Rated 5 out of 5">
+							{Array.from({ length: 5 }, () => (
+								<Icon name="star" class="size-4" />
+							))}
+						</span>
+						<blockquote class="mt-6 flex-1 text-lg leading-relaxed text-bone/90">
+							<p>“{r.quote}”</p>
+						</blockquote>
+						<figcaption class="mt-8 border-t border-line pt-5 text-sm text-mute">
+							{r.context}
+						</figcaption>
+					</figure>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>
