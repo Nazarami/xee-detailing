@@ -1,28 +1,45 @@
 # Xee Detailing Website
 
-A website for Xee Detailing, a Melbourne-based car detailing business.
+The website for [Xee Detailing](https://xeedetailing.com), a Melbourne car detailing business offering paint correction, Gyeon ceramic coatings and interior detailing.
 
-## Technologies
+![Xee Detailing screenshot](screenshot.jpg)
 
-- Svelte
-- TailwindCSS
+## Stack
+
+- [SvelteKit 2](https://svelte.dev/docs/kit) with Svelte 5, fully prerendered to static HTML
+- [Tailwind CSS 4](https://tailwindcss.com)
 - TypeScript
-- Yarn
+- Self-hosted fonts: Archivo (variable width) and Instrument Serif
+- Deployed on Netlify (`@sveltejs/adapter-netlify`)
 
-## Usage
+## Development
 
-1. Clone the repository to your local machine
+```sh
+yarn install
+yarn dev        # http://localhost:5173
+yarn check      # type-check
+yarn format     # prettier
+yarn build      # production build into ./build
+```
 
-2. Install dependencies
+## Editing content
 
-3. Start the development server
+Almost all copy lives in [`src/lib/data.ts`](src/lib/data.ts): contact details, socials, services, packages, reviews and the gallery. Edit that file and the whole site updates.
 
-The website should be running at `http://localhost:5000`.
+### Photos
 
-## Screenshot
+Photos live in `static/photos/` as WebP at three sizes (`-800`, `-1600`, `-2400`). To add one, export it at those widths (longest edge), then add an entry to `photos` in `data.ts` with its real pixel widths and aspect ratio. With ImageMagick:
 
-![Xee Detailing Screenshot](screenshot.png)
+```sh
+for w in 800 1600 2400; do
+  convert input.jpg -auto-orient -strip -resize "${w}x${w}>" -quality 74 static/photos/my-photo-$w.webp
+done
+```
+
+## Contact form
+
+The form posts to [FormSubmit](https://formsubmit.co) at `xeedetailing@gmail.com` and redirects to `/thanks` afterwards. No backend is required.
 
 ## License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+[MIT](LICENSE)

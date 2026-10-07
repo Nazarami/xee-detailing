@@ -1,3 +1,95 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+	--color-ink: #0a0a0b;
+	--color-ink-2: #121214;
+	--color-ink-3: #1b1b1f;
+	--color-line: #2a2a30;
+	--color-bone: #f3f1ec;
+	--color-mute: #a3a29d;
+	--color-dim: #6d6c68;
+	--color-ember: #ff4a2b;
+	--color-ember-deep: #d9341a;
+
+	--font-sans: 'Archivo Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 5rem;
+		-webkit-text-size-adjust: 100%;
+	}
+	body {
+		@apply bg-ink font-sans text-bone antialiased;
+		font-variation-settings: 'wdth' 100;
+	}
+	::selection {
+		@apply bg-ember text-ink;
+	}
+	:focus-visible {
+		@apply outline-2 outline-offset-2 outline-ember;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
+
+@utility font-wide {
+	font-variation-settings: 'wdth' 125;
+}
+
+@utility font-condensed {
+	font-variation-settings: 'wdth' 75;
+}
+
+@utility eyebrow {
+	@apply text-xs font-semibold tracking-[0.25em] text-ember uppercase;
+}
+
+@utility container-x {
+	@apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+}
+
+@utility btn {
+	@apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide transition duration-300;
+}
+
+@utility btn-primary {
+	@apply btn bg-ember text-ink hover:bg-bone;
+}
+
+@utility btn-ghost {
+	@apply btn border border-bone/25 text-bone hover:border-bone hover:bg-bone hover:text-ink;
+}
+
+/* Scroll-reveal, driven by the `reveal` action */
+.reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	transition:
+		opacity 0.9s var(--ease-out-expo),
+		transform 0.9s var(--ease-out-expo);
+	transition-delay: var(--delay, 0ms);
+}
+.reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+	}
+}
