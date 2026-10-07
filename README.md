@@ -92,14 +92,16 @@ npm run preview   # serve ./dist locally on the Workers runtime
 
 ## Deployment
 
+Every push to `main` deploys automatically. The repository is connected to the `xee-detailing` Worker through [Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/), which runs `npm run build` and then `npx wrangler deploy`, with the build status shown on each commit. The Node version comes from [`.node-version`](.node-version).
+
+The custom domain in `wrangler.jsonc` (`xee.amirnaz.com`) is created automatically, including DNS and the TLS certificate, because the zone is on the same Cloudflare account.
+
+To deploy by hand from your machine instead:
+
 ```sh
 npx wrangler login
 npm run deploy
 ```
-
-`npm run deploy` builds the site and uploads `./dist` to the `xee-detailing` Worker. The custom domain in `wrangler.jsonc` (`xee.amirnaz.com`) is created automatically, including DNS and the TLS certificate, as long as the zone is on the same Cloudflare account.
-
-To deploy on every push instead, connect the repository under **Workers & Pages → Create → Import a repository**, with `npm run build` as the build command and `npx wrangler deploy` as the deploy command.
 
 ## Editing content
 
